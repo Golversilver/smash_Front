@@ -1,0 +1,81 @@
+<div class="min-h-screen flex items-center justify-center bg-[url('/imagenes/loginFondo.jpg')] bg-cover bg-center">
+
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+    
+    <h1 class="text-3xl font-bold text-center mb-8">
+      Iniciar sesión
+    </h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="mb-4">
+        <label class="block text-sm font-medium mb-2">
+          Correo
+        </label>
+
+        <input
+          type="email"
+          formControlName="email"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+
+       @if (email.touched && email.hasError('required')) {
+        <p class="text-red-600 text-sm mt-1">
+            El correo es obligatorio.
+        </p>
+        }
+
+        @if (email.touched && email.hasError('email')) {
+        <p class="text-red-600 text-sm mt-1">
+            El correo no es válido.
+        </p>
+        }
+
+      </div>
+
+      
+
+      <div class="mb-6">
+        <label class="block text-sm font-medium mb-2">
+          Contraseña
+        </label>
+
+        <input
+          type="password"
+          formControlName="password"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+
+        @if (password.touched && password.hasError('required')) {
+        <p class="text-red-600 text-sm mt-1">
+            La contraseña es obligatoria.
+        </p>
+        }
+
+        @if (password.touched && password.hasError('minlength')) {
+        <p class="text-red-600 text-sm mt-1">
+            La contraseña debe tener al menos 8 caracteres.
+        </p>
+        }
+
+      </div>
+
+      @if (loginError()) {
+        <p class="text-red-600 text-sm mb-4">
+            {{ loginError() }}
+        </p>
+      }
+
+      <button
+        class="w-full bg-red-700 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition">
+        Entrar
+      </button>
+
+      <div class="text-center mt-4">
+      <a class="text-red-600 hover:text-red-700 hover:underline" [routerLink]="['/registro']">¿No tienes cuenta?, registrate aqui</a>
+      </div>
+
+    </form>
+
+    </div>
+
+</div>

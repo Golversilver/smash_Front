@@ -1,0 +1,251 @@
+<app-navbar />
+
+<div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mx-8 mt-6">
+
+    <div class="flex items-center">
+
+        <!-- Imagen -->
+        <div class="w-1/2 flex justify-center bg-white ">
+
+            <img
+                src="/imagenes/Super Smash Bros. Ultimate Renders/34.png"
+                class="w-[380px] h-[380px] object-contain rounded-full border-10 border-red-600 p-2 shadow-lg">
+
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="w-1/2 flex flex-col justify-center">
+
+            <h1 class="text-5xl font-extrabold text-gray-800">
+                Zero Suit Samus
+            </h1>
+
+            <p class="text-gray-500 text-xl mt-2">
+                Estadísticas generales
+            </p>
+
+            <div class="mt-10">
+
+                <h2 class="text-gray-500 text-lg">
+                    Win Rate
+                </h2>
+
+                <p class="text-7xl font-extrabold text-red-600">
+                    60%
+                </p>
+
+            </div>
+
+            <div class="flex gap-16 mt-10">
+
+                <div>
+                    <p class="text-gray-500 text-lg">
+                        Victorias
+                    </p>
+
+                    <p class="text-5xl font-bold text-green-600">
+                        180
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500 text-lg">
+                        Derrotas
+                    </p>
+
+                    <p class="text-5xl font-bold text-red-600">
+                        120
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<div class="grid grid-cols-4 gap-6 mt-8">
+
+  <!-- Tarjeta -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+    <!-- Título -->
+    <div class="bg-red-600 text-white text-center font-bold py-3">
+      Best Matchup
+    </div>
+
+    <!-- Imagen -->
+    <div class="flex justify-center items-center p-6">
+      <img
+        src="/imagenes/Super Smash Bros. Ultimate Renders/34.png"
+        class="w-32 h-32 object-contain">
+    </div>
+
+    <!-- Texto -->
+    <div class="text-center text-gray-600 font-medium pb-4">
+      Fox
+    </div>
+
+  </div>
+
+  <!-- Tarjeta -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+    <div class="bg-red-600 text-white text-center font-bold py-3">
+      Worst Matchup
+    </div>
+
+    <div class="flex justify-center items-center p-6">
+      <img
+        src="/imagenes/Super Smash Bros. Ultimate Renders/8.png"
+        class="w-32 h-32 object-contain">
+    </div>
+
+    <div class="text-center text-gray-600 font-medium pb-4">
+      Pikachu
+    </div>
+
+  </div>
+
+  <!-- Tarjeta -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+    <div class="bg-red-600 text-white text-center font-bold py-3">
+      Best Stage
+    </div>
+
+    <div class="flex justify-center items-center p-6">
+      <img
+        src="/imagenes/stages/2.png"
+        class="w-52 h-32 object-cover rounded">
+    </div>
+
+    <div class="text-center text-gray-600 font-medium pb-4">
+      Pokémon Stadium 2
+    </div>
+
+  </div>
+
+  <!-- Tarjeta -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+    <div class="bg-red-600 text-white text-center font-bold py-3">
+      Worst Stage
+    </div>
+
+    <div class="flex justify-center items-center p-6">
+      <img
+        src="/imagenes/stages/1.png"
+        class="w-52 h-32 object-cover rounded">
+    </div>
+
+    <div class="text-center text-gray-600 font-medium pb-4">
+      Kalos
+    </div>
+
+   <!-- </div>
+        Tarjeta
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+            <div class="bg-red-600 text-white text-center font-bold py-3">
+            Best Character
+            </div>
+
+            <div class="flex justify-center items-center p-6">
+            <img
+                src="/imagenes/Super Smash Bros. Ultimate Renders/34.png"
+                class="w-32 h-32 object-contain">
+            </div>
+
+            <div class="text-center text-gray-600 font-medium pb-4">
+            Zero Suit Samus
+            </div>
+
+        </div>
+
+     
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+            <div class="bg-red-600 text-white text-center font-bold py-3">
+            Worst Character
+            </div>
+
+            <div class="flex justify-center items-center p-6">
+            <img
+                src="/imagenes/Super Smash Bros. Ultimate Renders/9.png"
+                class="w-32 h-32 object-contain">
+            </div>
+
+            <div class="text-center text-gray-600 font-medium pb-4">
+            Ganondorf
+            </div>
+
+        </div> -->
+
+        </div>   
+     </div>
+
+        
+    <div class="mt-8 bg-white rounded-xl shadow-xl overflow-hidden">
+
+      <div class="bg-red-600 text-white px-6 py-4 flex justify-between items-center">
+
+        <h2 class="text-xl font-bold">
+          Últimos combates
+        </h2>
+
+        <a href="/nuevoCombate"
+          class="px-5 py-2 rounded-lg bg-white text-red-600 font-semibold hover:bg-gray-100 transition cursor-pointer">
+          + Registrar combate
+        </a>
+
+      </div>
+
+
+        <table class="w-full">
+
+            <thead class="border-b-2 border-gray-300">
+                <tr class="text-left text-gray-700">
+                    <th class="px-6 py-3">Resultado</th>
+                    <th class="px-6 py-3">Rival</th>
+                    <th class="px-6 py-3">Stage</th>
+                    <th class="px-6 py-3">Fecha</th>
+                </tr>
+            </thead>
+
+            <tbody class="border-b-2 border-gray-300">
+
+                <tr>
+                    <td class="px-6 py-4 text-green-600 font-bold">W</td>
+                    <td class="px-6 py-4">Fox</td>
+                    <td class="px-6 py-4">Battlefield</td>
+                    <td class="px-6 py-4 text-gray-500">Hace 2 h</td>
+                </tr>
+
+                <tr>
+                    <td class="px-6 py-4 text-red-600 font-bold">L</td>
+                    <td class="px-6 py-4">Pikachu</td>
+                    <td class="px-6 py-4">Small Battlefield</td>
+                    <td class="px-6 py-4 text-gray-500">Ayer</td>
+                </tr>
+
+                <tr>
+                    <td class="px-6 py-4 text-green-600 font-bold">W</td>
+                    <td class="px-6 py-4">Cloud</td>
+                    <td class="px-6 py-4">Pokémon Stadium 2</td>
+                    <td class="px-6 py-4 text-gray-500">Hace 3 días</td>
+                </tr>
+
+                <tr>
+                    <td class="px-6 py-4 text-green-600 font-bold">W</td>
+                    <td class="px-6 py-4">Roy</td>
+                    <td class="px-6 py-4">Smashville</td>
+                    <td class="px-6 py-4 text-gray-500">Hace 1 semana</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
