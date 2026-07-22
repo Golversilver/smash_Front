@@ -142,4 +142,11 @@ export default class Dashboard {
 
   }
 
+  restarStats(){
+    this.selectedCharacter.set(null);
+    this.getGames();
+    this.getWinRate();
+    this.getCards();
+  }
+
 }
