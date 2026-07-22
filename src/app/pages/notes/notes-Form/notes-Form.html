@@ -1,0 +1,180 @@
+<app-navbar />
+
+<div class="max-w-4xl mx-auto px-8 py-10">
+
+  <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+
+    <div class="bg-red-600 text-white px-8 py-5">
+
+  @if(rivalId()) {
+
+    <h1 class="text-3xl font-bold">
+      Nueva nota de enfrentamiento
+    </h1>
+
+    <p class="text-red-100 mt-1">
+      Agrega una nota para este enfrentamiento.
+    </p>
+
+  } @else {
+
+    <h1 class="text-3xl font-bold">
+      Nueva nota
+    </h1>
+
+    <p class="text-red-100 mt-1">
+      Agrega una nota para este personaje.
+    </p>
+
+  }
+
+
+    </div>
+
+    <form  class="p-8 space-y-8" [formGroup]="rosterNoteForm" (ngSubmit)="createNote(rosterId)">
+
+      <!-- Título -->
+      <div>
+
+        <label class="block mb-2 font-semibold text-gray-700">
+          Título
+        </label>
+
+        <input
+          type="text"
+          formControlName="title"
+          placeholder="Ej. Castigar Up Smash"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-red-500 focus:outline-none">
+
+      </div>
+
+      <!-- Descripción -->
+      <div>
+
+        <label class="block mb-2 font-semibold text-gray-700">
+          Descripción
+        </label>
+
+        <textarea
+          rows="6"
+          formControlName="description"
+          placeholder="Escribe aquí la nota..."
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 resize-none focus:ring-2 focus:ring-red-500 focus:outline-none">
+        </textarea>
+
+      </div>
+
+      <!-- Prioridad -->
+      <div>
+
+        <label class="block mb-2 font-semibold text-gray-700">
+          Prioridad
+        </label>
+
+        <select
+          formControlName="importance"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-red-500 focus:outline-none">
+
+          <option value="" disabled>
+            Selecciona una prioridad
+          </option>
+
+          <option value="HIGH">
+            🔴 Alta
+          </option>
+
+          <option value="MEDIUM">
+            🟡 Media
+          </option>
+
+          <option value="LOW">
+            🟢 Baja
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+
+<!-- Compartir nota -->
+
+        <div class="rounded-xl border border-gray-200 bg-gray-50 p-5">
+
+        <div class="flex items-start gap-4">
+
+            <input
+            id="isPublic"
+            type="checkbox"
+            formControlName="is_public"
+            class="mt-1 h-5 w-5 accent-red-600">
+
+            <div>
+
+            <label
+                for="isPublic"
+                class="font-semibold text-gray-800 cursor-pointer">
+
+                🌎 Compartir esta nota con la comunidad
+
+            </label>
+
+            <p class="mt-1 text-sm text-gray-600">
+
+                Si activas esta opción, otros jugadores podrán ver esta nota y aprender
+                de tu experiencia. Si está desactivada, únicamente tú podrás verla.
+
+            </p>
+
+            </div>
+
+        </div>
+
+        </div>
+
+
+
+
+      <!-- Botones -->
+      <div class="flex justify-end gap-4">
+
+          @if(rivalId()) {
+        <a
+          [routerLink]="['/notas', rosterId]"
+          [queryParams]="{ rival: rivalId() }"
+          class="px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 transition">
+
+          Cancelar
+
+        </a>
+         }@else{
+
+        <a
+          [routerLink]="['/notas', rosterId]"
+          class="px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 transition">
+
+          Cancelar
+
+        </a>
+
+         }
+
+
+
+
+        <button
+          type="submit"
+          class="cursor-pointer px-6 py-3 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 transition">
+
+          Guardar nota
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

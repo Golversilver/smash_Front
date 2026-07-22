@@ -1,0 +1,181 @@
+<app-navbar />
+
+<div class="flex justify-center mt-8">
+
+    <div class="w-full lg:w-[90%] bg-white rounded-2xl shadow-xl border border-gray-100">
+
+        <div class="px-8 py-6">
+
+            <!-- Contenido -->
+
+
+
+<!-- ================= FILTROS ================= -->
+
+<div class="flex flex-col lg:flex-row justify-between items-end gap-6 mb-8">
+
+    <!-- Modalidad -->
+    <div class="w-full lg:w-auto">
+
+        <label class="block mb-2 text-sm font-semibold text-gray-600">
+            🌐 Modalidad
+        </label>
+
+        <div class="flex gap-2 flex-wrap">
+
+            <button
+                (click)="selectOnline(undefined)"
+                [class.bg-red-600]="onlineFilter() === undefined"
+                [class.text-white]="onlineFilter() === undefined"
+                class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-600 hover:text-white transition cursor-pointer">
+
+                Todas
+
+            </button>
+
+            <button
+                (click)="selectOnline(true)"
+                [class.bg-red-600]="onlineFilter() === true"
+                [class.text-white]="onlineFilter() === true"
+                class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-600 hover:text-white transition cursor-pointer">
+
+                Online
+
+            </button>
+
+            <button
+                (click)="selectOnline(false)"
+                [class.bg-red-600]="onlineFilter() === false"
+                [class.text-white]="onlineFilter() === false"
+                class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-600 hover:text-white transition cursor-pointer">
+
+                Offline
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CONTENIDO ================= -->
+
+<div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+
+    <!-- Encabezado -->
+
+    <div class="px-8 py-6 border-b">
+
+        <h2 class="text-2xl font-bold text-gray-800">
+            Estadísticas por escenario
+        </h2>
+
+        <p class="text-gray-500 mt-1">
+            Consulta el rendimiento en cada escenario.
+        </p>
+
+    </div>
+
+
+    <!-- Tabla -->
+
+    <div class="overflow-x-auto">
+
+        <table class="min-w-full">
+
+            <thead class="bg-gray-50">
+
+                <tr class="text-gray-600 uppercase text-xs tracking-wider">
+
+                    <th class="text-left px-8 py-4">
+                        Personaje
+                    </th>
+
+                    <th class="text-center px-6 py-4">
+                        Partidas
+                    </th>
+
+                    <th class="text-center px-6 py-4">
+                        Victorias
+                    </th>
+
+                    <th class="text-center px-6 py-4">
+                        Win Rate
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+
+                @for (roster of rosterStats(); track $index) {
+     
+                <!-- Fila de ejemplo -->
+
+                <tr class="border-t hover:bg-red-50 transition">
+
+                    <td class="px-8 py-5">
+
+                        <div class="flex items-center gap-5">
+
+                        <div class="w-28 h-28 flex items-center justify-center">
+
+                                <img
+                                    [src]="'imagenes/Super Smash Bros. Ultimate Renders/' + roster.characterId + '.png'"
+                                    class="max-w-full max-h-full object-contain">
+
+                        </div>
+
+                            <div>
+
+                                <p class="font-semibold text-gray-800">
+                                    {{roster.character}}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td class="text-center font-medium">
+                          {{roster.games}}
+                    </td>
+
+                    <td class="text-center font-medium">
+                           {{roster.wins}}
+                    </td>
+
+                    <td class="text-center">
+
+                        <span class="bg-green-100 text-green-700 font-semibold px-3 py-1 rounded-full">
+
+                          {{roster.winRate}}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+

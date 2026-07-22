@@ -1,0 +1,813 @@
+  <app-navbar />
+
+  <!-- ========================================= -->
+  <!-- HERO -->
+  <!-- ========================================= -->
+
+  <section
+    class="relative w-full overflow-hidden bg-gradient-to-r from-gray-50 via-white to-gray-100 shadow-lg">
+
+    <!-- Fondo -->
+
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,.06),transparent_70%)]">
+    </div>
+
+    <!-- ================= PERSONAJE PRINCIPAL ================= -->
+
+    <img
+      [src]="'/imagenes/Super Smash Bros. Ultimate Renders/' + roster().character.id + '.png'"
+      [alt]="roster().character.name"
+      class="
+        hidden lg:block
+        absolute
+        left-0
+        top-1/2
+        -translate-y-1/2
+        h-[580px]
+        object-contain
+        transition-all
+        duration-500">
+
+    <!-- ================= PERSONAJE RIVAL ================= -->
+
+    @if(rival()){
+
+      <img
+        [src]="'/imagenes/Super Smash Bros. Ultimate Renders/' + rival()!.id + '.png'"
+        class="
+          hidden lg:block
+          absolute
+          right-0
+          top-1/2
+          -translate-y-1/2
+          h-[580px]
+          object-contain
+          transition-all
+          duration-500">
+
+    }
+
+    <!-- ================= CONTENIDO ================= -->
+
+    <div
+      class="
+        relative
+        mx-auto
+        max-w-[1800px]
+        min-h-[520px]
+        lg:min-h-[620px]
+        flex
+        items-center
+        justify-center
+        px-6
+        lg:px-0">
+
+      <div
+        class="
+          w-full
+          max-w-xl
+          text-center
+          transition-all
+          duration-500">
+
+        @if(!rival()) {
+
+          <!-- Imagen del personaje SOLO EN MÓVIL -->
+
+          <img
+            [src]="'/imagenes/Super Smash Bros. Ultimate Renders/' + roster().character.id + '.png'"
+            class="w-52 mx-auto mb-6 lg:hidden">
+
+          <h1
+            class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900">
+
+            {{ roster().character.name }}
+
+          </h1>
+
+          <p
+            class="mt-3 text-lg md:text-xl lg:text-2xl text-gray-500">
+
+            Character Notes
+
+          </p>
+
+          <div
+            class="mt-8 w-full max-w-[420px] mx-auto">
+
+            <label
+              class="uppercase tracking-[0.3em] text-sm font-bold text-gray-500">
+
+              Matchup
+
+            </label>
+
+            <ng-select
+              class="matchup-select"
+              [items]="characters()"
+              bindLabel="name"
+              placeholder="Selecciona un personaje"
+              (change)="asignarRival($event)">
+            </ng-select>
+
+          </div>
+
+        } @else {
+
+          <!-- Imágenes pequeñas SOLO EN MÓVIL -->
+
+          <div
+            class="flex items-center justify-center gap-5 mb-6 lg:hidden">
+
+            <img
+              [src]="'/imagenes/Super Smash Bros. Ultimate Renders/' + roster().character.id + '.png'"
+              class="w-24">
+
+            <span
+              class="text-3xl font-black text-red-600">
+
+              VS
+
+            </span>
+
+            <img
+              [src]="'/imagenes/Super Smash Bros. Ultimate Renders/' + rival()!.id + '.png'"
+              class="w-24">
+
+          </div>
+
+          <h2
+            class="text-3xl md:text-5xl lg:text-5xl font-black text-gray-900">
+
+            {{ roster().character.name }}
+
+          </h2>
+
+          <div
+            class="hidden lg:block my-4 text-6xl font-black text-red-600">
+
+            VS
+
+          </div>
+
+          <h2
+            class="text-3xl md:text-5xl lg:text-5xl font-black text-gray-900">
+
+            {{ rival()?.name }}
+
+          </h2>
+
+          <div
+            class="mt-8 w-full max-w-[420px] mx-auto">
+
+            <ng-select
+              class="matchup-select"
+              [items]="characters()"
+              bindLabel="name"
+              placeholder="Cambiar rival..."
+              (change)="asignarRival($event)">
+            </ng-select>
+
+          </div>
+
+          <p
+            class="mt-6 text-lg md:text-xl lg:text-2xl text-gray-500">
+
+            Matchup Notes
+
+          </p>
+
+        }
+
+        @if(rival()){
+
+          <a
+            [routerLink]="['/notas', rosterId, 'crearNota']"
+            [queryParams]="{ rival: rival()!.id }"
+            class="
+              inline-flex
+              mt-8
+              rounded-2xl
+              bg-red-600
+              px-8
+              lg:px-10
+              py-4
+              font-bold
+              text-white
+              hover:bg-red-700
+              transition">
+
+            + Nueva nota
+
+          </a>
+
+          } @else {
+
+          <a
+            [routerLink]="['/notas', rosterId, 'crearNota']"
+            class="
+              inline-flex
+              mt-8
+              rounded-2xl
+              bg-red-600
+              px-8
+              lg:px-10
+              py-4
+              font-bold
+              text-white
+              hover:bg-red-700
+              transition">
+
+            + Nueva nota
+
+          </a>
+
+          }
+
+        <br>
+
+        @if(rival()){
+
+          <button
+            (click)="volverNotasSingles()"
+            class="
+              mt-6
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              border
+              border-gray-300
+              bg-white
+              px-5
+              py-3
+              text-sm
+              font-semibold
+              text-gray-700
+              shadow-sm
+              hover:bg-gray-100
+              hover:border-gray-400
+              transition">
+
+            <span class="text-lg">←</span>
+
+            Volver a notas del personaje
+
+          </button>
+
+        }
+
+        <br>
+
+        @if (rival()) {
+
+          <a
+            [routerLink]="['/notas-publicas', rosterId]"
+            [queryParams]="{ rival: rival()!.id }"
+            class="
+              inline-flex
+              items-center
+              gap-2
+              mt-4
+              rounded-2xl
+              border
+              border-blue-600
+              bg-white
+              px-8
+              py-4
+              font-bold
+              text-blue-700
+              hover:bg-blue-50
+              transition">
+
+            🌎 Ver notas públicas
+
+          </a>
+
+        } @else {
+
+          <a
+            [routerLink]="['/notas-publicas', rosterId]"
+            class="
+              inline-flex
+              items-center
+              gap-2
+              mt-4
+              rounded-2xl
+              border
+              border-blue-600
+              bg-white
+              px-8
+              py-4
+              font-bold
+              text-blue-700
+              hover:bg-blue-50
+              transition">
+
+            🌎 Ver notas públicas
+
+          </a>
+
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================= -->
+  <!-- CONTENIDO -->
+  <!-- ========================================= -->
+
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div
+      class="mt-10 rounded-3xl bg-blue-50 border border-blue-200 p-8">
+
+      <div class="flex gap-5">
+
+        <div class="text-5xl">
+
+          💡
+
+        </div>
+
+        <div>
+
+          <h2
+            class="text-2xl font-black text-blue-900">
+
+            ¿Qué puedes guardar aquí?
+
+          </h2>
+
+          <p
+            class="mt-3 text-blue-800 leading-8">
+
+            Guarda confirms, combos, edgeguards, hábitos del rival,
+            kill setups, opciones defensivas y cualquier información
+            que quieras recordar.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="mt-10 mb-10 flex justify-between items-end">
+
+      <div>
+
+        <h2
+          class="text-4xl font-black">
+
+          Mis notas
+
+        </h2>
+
+        <p
+          class="text-gray-500">
+
+          Organizadas por prioridad.
+
+        </p>
+
+      </div>
+
+      <div class="flex gap-3">
+
+        <button class="rounded-full bg-red-100 text-red-700 px-5 py-2 font-bold">
+          HIGH
+        </button>
+
+        <button class="rounded-full bg-yellow-100 text-yellow-700 px-5 py-2 font-bold">
+          MEDIUM
+        </button>
+
+        <button class="rounded-full bg-green-100 text-green-700 px-5 py-2 font-bold">
+          LOW
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- ================= HIGH ================= -->
+
+    <section class="mb-16">
+
+      <div class="flex items-center gap-4 mb-8">
+
+        <div class="w-3 h-12 rounded-full bg-red-600"></div>
+
+        <div>
+
+          <h2 class="text-4xl font-black text-gray-800">
+
+            Alta prioridad
+
+          </h2>
+
+          <p class="text-gray-500">
+
+            Información crítica del personaje.
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        @for (note of highNotes(); track note.id) {
+
+        <div
+          class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-red-100">
+
+          <div class="h-2 bg-red-600"></div>
+
+          <div class="p-7">
+
+            <div class="flex justify-between items-center mb-5">
+
+              <span
+                class="rounded-full bg-red-100 text-red-700 px-4 py-1 text-sm font-bold">
+
+                HIGH
+
+              </span>
+
+              @if(note.is_public){
+
+              <span
+                class="rounded-full bg-sky-100 text-sky-700 px-3 py-1 text-sm font-semibold">
+
+                🌎 Pública
+
+              </span>
+
+              }
+
+              <div class="flex justify-between items-start mb-5 relative">
+
+                  <button
+                    (click)="toggleMenu(note.id)"
+                    class="h-9 w-9 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition">
+
+                    ⋮
+
+                  </button>
+
+                                <!-- Menú -->
+                  @if(menuAbierto() === note.id){
+
+                    <div
+                      class="absolute top-10 right-0 w-44 rounded-xl bg-white border border-gray-200 shadow-xl overflow-hidden z-50">
+
+                      <button
+                        (click)="editarNota(note.id)"
+                        class="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3">
+
+                        ✏️ Editar
+
+                      </button>
+
+                      <button (click)="deleteNote(note.id)"
+                        class="w-full px-4 py-3 text-left text-red-600 hover:bg-red-50 flex items-center gap-3">
+
+                        🗑 Eliminar
+
+                      </button>
+
+                    </div>
+
+                  }
+                  </div>
+
+
+            </div>
+
+            <h3
+              class="text-2xl font-black text-gray-800 group-hover:text-red-600 transition">
+
+              {{note.title}}
+
+            </h3>
+
+            <p
+              class="mt-4 text-gray-600 leading-7">
+
+              {{note.description}}
+
+            </p>
+
+            
+
+          </div>
+
+        </div>
+
+        }
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= MEDIUM ================= -->
+
+    <section class="mb-16">
+
+      <div class="flex items-center gap-4 mb-8">
+
+        <div class="w-3 h-12 rounded-full bg-amber-500"></div>
+
+        <div>
+
+          <h2 class="text-4xl font-black text-gray-800">
+
+            Prioridad media
+
+          </h2>
+
+          <p class="text-gray-500">
+
+            Aspectos importantes a recordar.
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
+
+        @for (note of mediumNotes(); track note.id) {
+
+        <div
+          class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-amber-100">
+
+          <div class="h-2 bg-amber-500"></div>
+
+          <div class="p-7">
+
+            <div class="flex justify-between items-center mb-5">
+
+              <span
+                class="rounded-full bg-amber-100 text-amber-700 px-4 py-1 text-sm font-bold">
+
+                MEDIUM
+
+              </span>
+
+              @if(note.is_public){
+
+              <span
+                class="rounded-full bg-sky-100 text-sky-700 px-3 py-1 text-sm font-semibold">
+
+                🌎 Pública
+
+              </span>
+
+              }
+
+
+              <div class="flex justify-between items-start mb-5 relative">
+
+                  <button
+                    (click)="toggleMenu(note.id)"
+                    class="h-9 w-9 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition">
+
+                    ⋮
+
+                  </button>
+
+                                <!-- Menú -->
+                  @if(menuAbierto() === note.id){
+
+                    <div
+                      class="absolute top-10 right-0 w-44 rounded-xl bg-white border border-gray-200 shadow-xl overflow-hidden z-50">
+
+                      <button
+                        (click)="editarNota(note.id)"
+                        class="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3">
+
+                        ✏️ Editar
+
+                      </button>
+
+                      <button (click)="deleteNote(note.id)"
+                        class="w-full px-4 py-3 text-left text-red-600 hover:bg-red-50 flex items-center gap-3">
+
+                        🗑 Eliminar
+
+                      </button>
+
+                    </div>
+
+                  }
+                  </div>
+
+
+
+            </div>
+
+            <h3
+              class="text-2xl font-black text-gray-800 group-hover:text-amber-600 transition">
+
+              {{note.title}}
+
+            </h3>
+
+            <p
+              class="mt-4 text-gray-600 leading-7">
+
+              {{note.description}}
+
+            </p>
+
+          </div>
+
+        </div>
+
+        }
+
+      </div>
+
+    </section>
+
+      <!-- ================= LOW ================= -->
+
+    <section class="mb-20">
+
+      <div class="flex items-center gap-4 mb-8">
+
+        <div class="w-3 h-12 rounded-full bg-green-600 rounded-full"></div>
+
+        <div>
+
+          <h2 class="text-4xl font-black text-gray-800">
+
+            Baja prioridad
+
+          </h2>
+
+          <p class="text-gray-500">
+
+            Detalles útiles y recordatorios generales.
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
+
+        @for (note of lowNotes(); track note.id) {
+
+        <div
+          class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-green-100">
+
+          <div class="h-2 bg-green-600"></div>
+
+          <div class="p-7">
+
+            <div class="flex justify-between items-center mb-5">
+
+              <span
+                class="rounded-full bg-green-100 text-green-700 px-4 py-1 text-sm font-bold">
+
+                LOW
+
+              </span>
+
+              @if(note.is_public){
+
+              <span
+                class="rounded-full bg-sky-100 text-sky-700 px-3 py-1 text-sm font-semibold">
+
+                🌎 Pública
+
+              </span>
+
+              }
+
+  <div class="flex justify-between items-start mb-5 relative">
+
+                  <button
+                    (click)="toggleMenu(note.id)"
+                    class="h-9 w-9 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition">
+
+                    ⋮
+
+                  </button>
+
+                                <!-- Menú -->
+                  @if(menuAbierto() === note.id){
+
+                    <div
+                      class="absolute top-10 right-0 w-44 rounded-xl bg-white border border-gray-200 shadow-xl overflow-hidden z-50">
+
+                      <button
+                        (click)="editarNota(note.id)"
+                        class="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3">
+
+                        ✏️ Editar
+
+                      </button>
+
+                      <button (click)="deleteNote(note.id)"
+                        class="w-full px-4 py-3 text-left text-red-600 hover:bg-red-50 flex items-center gap-3">
+
+                        🗑 Eliminar
+
+                      </button>
+
+                    </div>
+
+                  }
+                  </div>
+
+
+
+            </div>
+            
+            <h3
+              class="text-2xl font-black text-gray-800 group-hover:text-green-600 transition">
+
+              {{note.title}}
+
+            </h3>
+
+            <p
+              class="mt-4 text-gray-600 leading-7">
+
+              {{note.description}}
+
+            </p>
+
+          </div>
+
+        </div>
+
+        }
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= ESTADO VACÍO ================= -->
+
+    @if(
+      highNotes().length === 0 &&
+      mediumNotes().length === 0 &&
+      lowNotes().length === 0
+    ){
+
+    <div
+      class="bg-white rounded-3xl shadow-lg border border-gray-200 p-16 text-center">
+
+      <div class="text-7xl mb-5">
+
+        📝
+
+      </div>
+
+      <h2
+        class="text-3xl font-black text-gray-700">
+
+        Aún no tienes notas
+
+      </h2>
+
+      <p
+        class="text-gray-500 mt-3 max-w-xl mx-auto">
+
+        Empieza creando notas para registrar confirms, hábitos,
+        castigos, combos o cualquier información importante de este personaje.
+
+      </p>
+
+      <a
+        [routerLink]="['/notasPersonaje', rosterId, 'crear']"
+        class="inline-flex mt-8 px-8 py-4 rounded-2xl bg-red-600 text-white font-bold hover:bg-red-700 transition">
+
+        + Crear primera nota
+
+      </a>
+
+    </div>
+
+    }
+
+  </div>

@@ -1,0 +1,137 @@
+<app-navbar />
+
+<form [formGroup]="gameForm" (ngSubmit)="register()">
+
+<div class="max-w-3xl mx-4 md:mx-auto mt-6 md:mt-8 bg-white rounded-2xl shadow-xl overflow-hidden">
+
+<div class="bg-red-600 text-white px-4 md:px-6 py-4">
+    <h2 class="text-xl md:text-2xl font-bold">
+      Registrar combate
+    </h2>
+  </div>
+
+  <div class="p-4 md:p-8 space-y-6">
+
+    <!-- Mi personaje -->
+     <div>
+      <label class="block mb-2 font-semibold text-gray-700">
+        mi Personaje
+      </label>
+
+      <ng-select
+        class="custom-select"
+        [items]="roster()"
+        bindLabel="character.name"
+        bindValue="id"
+        formControlName="userRosterId"
+        placeholder="Selecciona un personaje">
+      </ng-select>
+    </div>
+
+
+    <!-- Rival -->
+      <div>
+      <label class="block mb-2 font-semibold text-gray-700">
+        Personaje rival
+      </label>
+
+      <ng-select
+        class="custom-select"
+        [items]="characters()"
+        bindLabel="name"
+        bindValue="id"
+        formControlName="characterRival"
+        placeholder="Selecciona un personaje">
+      </ng-select>
+    </div>
+
+    <!-- Stage -->
+
+      <div>
+      <label class="block mb-2 font-semibold text-gray-700">
+        Escenario
+      </label>
+
+      <ng-select
+        class="custom-select"
+        [items]="stages()"
+        bindLabel="name"
+        bindValue="id"
+        formControlName="stageId"
+        placeholder="Selecciona un escenario">
+      </ng-select>
+    </div>
+
+    <!-- Resultado -->
+    <div>
+      <label class="block mb-3 font-semibold text-gray-700">
+        Resultado
+      </label>
+
+      <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            formControlName="win"
+            [value]="true">
+          Victoria
+        </label>
+
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            formControlName="win"
+            [value]="false">
+          Derrota
+        </label>
+
+      </div>
+    </div>
+    <!-- Modalidad -->
+    <div>
+        <label class="block mb-3 font-semibold text-gray-700">
+          Modalidad
+        </label>
+
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              formControlName="online"
+              [value]="true">
+            Online
+          </label>
+
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              formControlName="online"
+              [value]="false">
+            Offline
+          </label>
+
+        </div>
+      </div>
+
+    <div class="flex justify-end gap-4 pt-4">
+
+      <a
+        routerLink="/panelPrincipal"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 transition cursor-pointer">
+        Cancelar
+      </a>
+
+      <button type="submit"
+        class="px-6 py-3 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 transition cursor-pointer">
+        Registrar combate
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+</form>

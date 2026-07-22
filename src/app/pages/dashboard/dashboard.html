@@ -1,28 +1,223 @@
 <app-navbar />
 
-<div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mx-8 mt-6">
+<div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 md:p-8 mx-4 md:mx-8 mt-6">
+    
+        @if(selectedCharacter()){
 
-    <div class="flex items-center">
+        <button
+            (click)="selectedCharacter.set(null)"
+            class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-gray-300 bg-white text-gray-700 font-semibold shadow-sm hover:bg-gray-50 hover:border-gray-400 transition cursor-pointer">
+
+            ← Volver a estadísticas generales
+
+        </button>
+
+    }
+
+    
+
+   <div class="flex flex-col lg:flex-row items-center gap-10">
 
         <!-- Imagen -->
-        <div class="w-1/2 flex justify-center bg-white ">
+        <div class="w-full lg:w-1/2 flex justify-center bg-white">
 
-            <img
-                src="/imagenes/Super Smash Bros. Ultimate Renders/34.png"
-                class="w-[380px] h-[380px] object-contain rounded-full border-10 border-red-600 p-2 shadow-lg">
+          @if(!selectedCharacter()){
 
+            <div class="flex flex-col items-center">
+
+                <div
+                    class="
+                        w-[380px]
+                        h-[380px]
+                        rounded-full
+                        border-8
+                        border-dashed
+                        border-red-500
+                        flex
+                        flex-col
+                        items-center
+                        justify-center
+                        bg-white
+                        transition">
+
+                    <span class="text-8xl text-red-400 font-light">
+                        +
+                    </span>
+
+                    <p class="mt-5 text-2xl font-bold text-gray-700">
+                        Selecciona un personaje
+                    </p>
+
+                    <p class="mt-2 text-center text-gray-500 max-w-[230px] leading-6">
+                        selecciona un personaje para ver sus estadisticas individuales
+                    </p>
+
+                </div>
+
+                <div class="mt-8 w-[320px]">
+
+                    <label class="block mb-2 text-sm font-semibold text-gray-600">
+                        🎮 Personaje
+                    </label>
+
+                <ng-select
+                    [items]="roster()"
+                    bindLabel="character.name"
+                    [searchable]="true"
+                    [clearable]="false"
+                    placeholder="Buscar personaje..."
+                    (change)="seleccionarPersonaje($event)">
+                </ng-select>
+
+
+                  <!-- Modalidad -->
+                <div class="mt-6">
+
+                    <label class="block mb-3 text-sm font-semibold text-gray-600">
+                        🌐 Modalidad
+                    </label>
+
+                    <div class="flex justify-center gap-2 flex-wrap">
+
+                        <button
+                            (click)="seleccionarModalidad(undefined)"
+                            [class.bg-red-600]="onlineFilter() === undefined"
+                            [class.text-white]="onlineFilter() === undefined"
+                            class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-600 hover:text-white transition cursor-pointer">
+
+                            Todas
+
+                        </button>
+
+                        <button
+                            (click)="seleccionarModalidad(true)"
+                            [class.bg-red-600]="onlineFilter() === true"
+                            [class.text-white]="onlineFilter() === true"
+                            class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-600 hover:text-white transition cursor-pointer">
+
+                            Online
+
+                        </button>
+
+                        <button
+                            (click)="seleccionarModalidad(false)"
+                            [class.bg-red-600]="onlineFilter() === false"
+                            [class.text-white]="onlineFilter() === false"
+                            class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-600 hover:text-white transition cursor-pointer">
+
+                            Offline
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                </div>
+
+            </div>
+
+        }@else{
+
+            <div class="flex flex-col items-center">
+
+            <div
+            class="w-[380px] h-[380px] rounded-full border-8 border-red-600 shadow-lg flex items-center justify-center">
+
+                <img
+                    [src]="'/imagenes/Super Smash Bros. Ultimate Renders/' + selectedCharacter()!.character.id + '.png'"
+                    class="w-[300px] h-[300px] object-contain">
+
+            </div>
+
+                <div class="mt-8 w-[320px]">
+
+                    <label class="block mb-2 text-sm font-semibold text-gray-600">
+                        🎮 Personaje
+                    </label>
+
+                <ng-select
+                    [items]="roster()"
+                    bindLabel="character.name"
+                    [searchable]="true"
+                    [clearable]="false"
+                    placeholder="Buscar personaje..."
+                    (change)="seleccionarPersonaje($event)">
+                </ng-select>
+
+                  <!-- Modalidad -->
+                <div class="mt-6">
+
+                    <label class="block mb-3 text-sm font-semibold text-gray-600">
+                        🌐 Modalidad
+                    </label>
+
+                    <div class="flex justify-center gap-2 flex-wrap">
+
+                        <button
+                            (click)="seleccionarModalidad(undefined)"
+                            [class.bg-red-600]="onlineFilter() === undefined"
+                            [class.text-white]="onlineFilter() === undefined"
+                            class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-600 hover:text-white transition cursor-pointer">
+
+                            Todas
+
+                        </button>
+
+                        <button
+                            (click)="seleccionarModalidad(true)"
+                            [class.bg-red-600]="onlineFilter() === true"
+                            [class.text-white]="onlineFilter() === true"
+                            class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-600 hover:text-white transition cursor-pointer">
+
+                            Online
+
+                        </button>
+
+                        <button
+                            (click)="seleccionarModalidad(false)"
+                            [class.bg-red-600]="onlineFilter() === false"
+                            [class.text-white]="onlineFilter() === false"
+                            class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-600 hover:text-white transition cursor-pointer">
+
+                            Offline
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                </div>
+            </div>
+        }
+
+        <br>
+
+        
+
+        
         </div>
 
         <!-- Estadísticas -->
-        <div class="w-1/2 flex flex-col justify-center">
+        <div class="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left">
+
+            @if (winRate().games > 0) {
+
+             @if(!selectedCharacter()){
 
             <h1 class="text-5xl font-extrabold text-gray-800">
-                Zero Suit Samus
+                Estadísticas generales
             </h1>
 
-            <p class="text-gray-500 text-xl mt-2">
-                Estadísticas generales
-            </p>
+            }@else {
+
+            <h1 class="text-5xl font-extrabold text-gray-800">
+                Estadísticas de {{selectedCharacter().character.name }}
+            </h1>
+
+            }
 
             <div class="mt-10">
 
@@ -30,13 +225,13 @@
                     Win Rate
                 </h2>
 
-                <p class="text-7xl font-extrabold text-red-600">
-                    60%
+                <p class="text-5xl md:text-7xl font-extrabold text-red-600">
+                    {{winRate().winRate}}%
                 </p>
 
             </div>
 
-            <div class="flex gap-16 mt-10">
+            <div class="flex justify-center lg:justify-start gap-8 md:gap-16 mt-10">
 
                 <div>
                     <p class="text-gray-500 text-lg">
@@ -44,7 +239,7 @@
                     </p>
 
                     <p class="text-5xl font-bold text-green-600">
-                        180
+                        {{winRate().wins}}
                     </p>
                 </div>
 
@@ -54,142 +249,218 @@
                     </p>
 
                     <p class="text-5xl font-bold text-red-600">
-                        120
+                         {{winRate().games - winRate().wins}}
                     </p>
                 </div>
 
             </div>
 
+            }@else {
+        
+            <div class="mt-12 rounded-xl border-2 border-dashed border-gray-300 p-8 text-center">
+
+                    <p class="text-5xl mb-3">📊</p>
+
+                    <h2 class="text-2xl font-bold text-gray-700">
+                        Aún no hay estadísticas
+                    </h2>
+
+                    <p class="mt-2 text-gray-500">
+                        Registra algunos combates para comenzar a ver tu win rate y rendimiento.
+                    </p>
+
+            </div>
+
+
+             }
+
         </div>
+
 
     </div>
 
 
-<div class="grid grid-cols-4 gap-6 mt-8">
+    @if (winRate().games > 0) {
 
-  <!-- Tarjeta -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mt-8">
+
+  @if(cards().worstMatchup){
+
+    <a [routerLink]="['/elenco/enfrentamientos/estadisticas/' + selectedCharacter().id]"
+    class="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition duration-200 cursor-pointer">
+
+     <!-- Tarjeta -->
   <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 
     <!-- Título -->
     <div class="bg-red-600 text-white text-center font-bold py-3">
-      Best Matchup
+      peores enfrentamientos
     </div>
 
     <!-- Imagen -->
     <div class="flex justify-center items-center p-6">
       <img
-        src="/imagenes/Super Smash Bros. Ultimate Renders/34.png"
+        [src]="'/imagenes/Super Smash Bros. Ultimate Renders/'+cards().worstMatchup.id+'.png'"
         class="w-32 h-32 object-contain">
     </div>
 
     <!-- Texto -->
     <div class="text-center text-gray-600 font-medium pb-4">
-      Fox
+      {{cards().worstMatchup.name}}
     </div>
 
   </div>
+  </a>
+  
+}
+
+  @if(cards().bestMatchup){
+
+    <a [routerLink]="['/elenco/enfrentamientos/estadisticas/' + selectedCharacter().id]"
+    class="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition duration-200 cursor-pointer">
+
 
   <!-- Tarjeta -->
   <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 
     <div class="bg-red-600 text-white text-center font-bold py-3">
-      Worst Matchup
+      Mejores Enfrentamientos
     </div>
 
     <div class="flex justify-center items-center p-6">
       <img
-        src="/imagenes/Super Smash Bros. Ultimate Renders/8.png"
+        [src]="'/imagenes/Super Smash Bros. Ultimate Renders/'+cards().bestMatchup.id+'.png'"
         class="w-32 h-32 object-contain">
     </div>
 
     <div class="text-center text-gray-600 font-medium pb-4">
-      Pikachu
+      {{cards().bestMatchup.name}}
     </div>
 
   </div>
 
-  <!-- Tarjeta -->
-  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+  </a>
+  }
 
-    <div class="bg-red-600 text-white text-center font-bold py-3">
-      Best Stage
-    </div>
+    @if(cards().worstCharacter){
 
-    <div class="flex justify-center items-center p-6">
-      <img
-        src="/imagenes/stages/2.png"
-        class="w-52 h-32 object-cover rounded">
-    </div>
-
-    <div class="text-center text-gray-600 font-medium pb-4">
-      Pokémon Stadium 2
-    </div>
-
-  </div>
-
-  <!-- Tarjeta -->
-  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-
-    <div class="bg-red-600 text-white text-center font-bold py-3">
-      Worst Stage
-    </div>
-
-    <div class="flex justify-center items-center p-6">
-      <img
-        src="/imagenes/stages/1.png"
-        class="w-52 h-32 object-cover rounded">
-    </div>
-
-    <div class="text-center text-gray-600 font-medium pb-4">
-      Kalos
-    </div>
-
-   <!-- </div>
-        Tarjeta
+    <a
+    [routerLink]="['/elenco/estadisticas']"
+    class="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition duration-200 cursor-pointer">
+        
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 
             <div class="bg-red-600 text-white text-center font-bold py-3">
-            Best Character
+            peor personaje
             </div>
 
             <div class="flex justify-center items-center p-6">
             <img
-                src="/imagenes/Super Smash Bros. Ultimate Renders/34.png"
+                [src]="'/imagenes/Super Smash Bros. Ultimate Renders/'+ cards().worstCharacter.id + '.png'"
                 class="w-32 h-32 object-contain">
             </div>
 
             <div class="text-center text-gray-600 font-medium pb-4">
-            Zero Suit Samus
+            {{cards().worstCharacter.name}}
             </div>
 
         </div>
 
+    </a>
+    }
+
+    @if(cards().bestCharacter){
      
+    <a
+    [routerLink]="['/elenco/estadisticas']"
+    class="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition duration-200 cursor-pointer">
+       
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 
             <div class="bg-red-600 text-white text-center font-bold py-3">
-            Worst Character
+            Mejor personaje
             </div>
 
             <div class="flex justify-center items-center p-6">
             <img
-                src="/imagenes/Super Smash Bros. Ultimate Renders/9.png"
+                [src]="'/imagenes/Super Smash Bros. Ultimate Renders/'+ cards().bestCharacter.id + '.png'"
                 class="w-32 h-32 object-contain">
             </div>
 
             <div class="text-center text-gray-600 font-medium pb-4">
-            Ganondorf
+            {{cards().bestCharacter.name}}
             </div>
 
-        </div> -->
+        </div>
+    </a>
 
-        </div>   
+    }
+
+
+  @if(cards().worstStage){
+   <a
+    [routerLink]="['/escenarios/estadisticas']"
+    class="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition duration-200 cursor-pointer">
+
+
+  <!-- Tarjeta -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+    <div class="bg-red-600 text-white text-center font-bold py-3">
+      Peor esenario
+    </div>
+
+    <div class="flex justify-center items-center p-6">
+      <img
+        [src]="'/imagenes/stages/' + cards().worstStage.id + '.png'"
+        class="w-52 h-32 object-cover rounded">
+    </div>
+
+    <div class="text-center text-gray-600 font-medium pb-4">
+       {{cards().worstStage.name}}
+    </div>
+
+  </div>
+
+   </a>
+  }
+
+
+    @if(cards().bestStage){
+   <a
+    [routerLink]="['/escenarios/estadisticas']"
+    class="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition duration-200 cursor-pointer">
+
+
+  <!-- Tarjeta -->
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+    <div class="bg-red-600 text-white text-center font-bold py-3">
+      Mejor esenario
+    </div>
+
+    <div class="flex justify-center items-center p-6">
+      <img
+        [src]="'/imagenes/stages/' + cards().bestStage.id + '.png'"
+        class="w-52 h-32 object-cover rounded">
+    </div>
+
+    <div class="text-center text-gray-600 font-medium pb-4">
+      {{cards().bestStage.name}}
+    </div>
+    </div>   
+
+   </a>
+    }
+
      </div>
+    }
 
         
     <div class="mt-8 bg-white rounded-xl shadow-xl overflow-hidden">
 
-      <div class="bg-red-600 text-white px-6 py-4 flex justify-between items-center">
+  <div class="bg-red-600 text-white px-6 py-4 flex flex-col sm:flex-row gap-4 justify-between items-center">
 
         <h2 class="text-xl font-bold">
           Últimos combates
@@ -203,11 +474,13 @@
       </div>
 
 
-        <table class="w-full">
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-[650px]">
 
             <thead class="border-b-2 border-gray-300">
                 <tr class="text-left text-gray-700">
                     <th class="px-6 py-3">Resultado</th>
+                    <th class="px-6 py-3">Personaje</th>
                     <th class="px-6 py-3">Rival</th>
                     <th class="px-6 py-3">Stage</th>
                     <th class="px-6 py-3">Fecha</th>
@@ -216,36 +489,107 @@
 
             <tbody class="border-b-2 border-gray-300">
 
-                <tr>
-                    <td class="px-6 py-4 text-green-600 font-bold">W</td>
-                    <td class="px-6 py-4">Fox</td>
-                    <td class="px-6 py-4">Battlefield</td>
-                    <td class="px-6 py-4 text-gray-500">Hace 2 h</td>
-                </tr>
+                @for (game of games(); track $index) {
 
                 <tr>
-                    <td class="px-6 py-4 text-red-600 font-bold">L</td>
-                    <td class="px-6 py-4">Pikachu</td>
-                    <td class="px-6 py-4">Small Battlefield</td>
-                    <td class="px-6 py-4 text-gray-500">Ayer</td>
-                </tr>
+                    @if(game.win){
+                        <td class="px-6 py-4 text-green-600 font-bold">w</td>
+                    }@else {
+                        <td class="px-6 py-4 text-red-600 font-bold">L</td>
+                    }
 
-                <tr>
-                    <td class="px-6 py-4 text-green-600 font-bold">W</td>
-                    <td class="px-6 py-4">Cloud</td>
-                    <td class="px-6 py-4">Pokémon Stadium 2</td>
-                    <td class="px-6 py-4 text-gray-500">Hace 3 días</td>
-                </tr>
+                    <td class="px-6 py-4">{{game.userRoster.character.name}}</td>
 
-                <tr>
-                    <td class="px-6 py-4 text-green-600 font-bold">W</td>
-                    <td class="px-6 py-4">Roy</td>
-                    <td class="px-6 py-4">Smashville</td>
-                    <td class="px-6 py-4 text-gray-500">Hace 1 semana</td>
+                    <td class="px-6 py-4">
+                        {{
+                            game.match.character1.id === game.userRoster.character.id
+                            ? game.match.character2.name
+                            : game.match.character1.name
+                        }}
+                    </td>
+
+                    <td class="px-6 py-4">{{game.stage.name}}</td>
+                    <td class="px-6 py-4 text-gray-500">
+                        {{ getTimeAgo(game.created_at) }}
+                    </td>
                 </tr>
+            }
 
             </tbody>
 
         </table>
+        </div>
+        </div>
 
-    </div>
+        @if (games().length > 0) {
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-5 mt-12 mb-16">
+
+            <button
+                (click)="paginaAnterior()"
+                [disabled]="page() === 1"
+                class="
+                inline-flex
+                items-center
+                gap-2
+                rounded-2xl
+                border
+                border-gray-300
+                bg-white
+                px-6
+                py-3
+                font-semibold
+                text-gray-700
+                shadow-sm
+                hover:bg-gray-100
+                hover:border-gray-400
+                disabled:opacity-40
+                disabled:cursor-not-allowed
+                transition">
+
+                ← Anterior
+
+            </button>
+
+            <div
+                class="
+                rounded-full
+                bg-blue-50
+                border
+                border-blue-200
+                px-6
+                py-3
+                text-blue-800
+                font-bold
+                shadow-sm">
+
+                Página {{ page() }} de {{ totalPages() }}
+
+            </div>
+
+            <button
+                (click)="paginaSiguiente()"
+                [disabled]="page() === totalPages()"
+                class="
+                inline-flex
+                items-center
+                gap-2
+                rounded-2xl
+                bg-blue-600
+                px-6
+                py-3
+                font-semibold
+                text-white
+                shadow-lg
+                hover:bg-blue-700
+                disabled:bg-blue-300
+                disabled:cursor-not-allowed
+                transition">
+
+                Siguiente →
+
+            </button>
+
+            </div>
+
+            }

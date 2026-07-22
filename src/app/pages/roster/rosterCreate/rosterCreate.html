@@ -10,7 +10,7 @@
 
     <!-- [formGroup]="rosterForm" (ngSubmit)="createRoster() -->
 
-    <form>
+    <form [formGroup]="rosterForm" (ngSubmit)="rosterRegister()">
 
       <div class="bg-red-600 text-white px-6 py-4">
         <h2 class="text-xl font-bold">
@@ -34,11 +34,11 @@
               Selecciona un personaje
             </option>
 
-            <!-- @for(character of characters(); track character.id) {
+            @for(character of characters(); track character.id) {
               <option [value]="character.id">
                 {{ character.name }}
               </option>
-            } -->
+            } 
 
           </select>
         </div>

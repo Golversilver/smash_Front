@@ -1,0 +1,57 @@
+:host ::ng-deep .matchup-select .ng-select-container {
+    min-height: 58px;
+    border-radius: 18px;
+    border: 1px solid #d1d5db;
+    background: white;
+    padding: 0 12px;
+    font-size: 18px;
+    transition: all .2s;
+}
+
+:host ::ng-deep .matchup-select.ng-select-focused .ng-select-container {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.25);
+}
+
+:host ::ng-deep .matchup-select .ng-placeholder {
+    color: #9ca3af;
+}
+
+:host ::ng-deep .matchup-select .ng-value {
+    font-weight: 600;
+    color: #111827;
+}
+
+:host ::ng-deep .matchup-select .ng-arrow-wrapper {
+    padding-right: 12px;
+}
+
+:host ::ng-deep .matchup-select .ng-arrow {
+    border-color: #6b7280 transparent transparent;
+}
+
+:host ::ng-deep .matchup-select .ng-dropdown-panel {
+    border-radius: 18px;
+    overflow: hidden;
+    margin-top: 6px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 15px 35px rgba(0,0,0,.12);
+}
+
+:host ::ng-deep .matchup-select .ng-select-container {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+}
+
+:host ::ng-deep .matchup-select .ng-value-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+:host ::ng-deep .matchup-select .ng-input {
+    top: 50% !important;
+    transform: translateY(-50%);
+}
+
