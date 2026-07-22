@@ -72,7 +72,7 @@ export default class Register {
         console.log('✅ NEXT');
         console.log(resp);
         localStorage.setItem('token', resp.accessToken);
-        this.router.navigate(['/PanelPrincipal']);
+        this.router.navigate(['/panelPrincipal']);
       },
 
       error: (err) => {
