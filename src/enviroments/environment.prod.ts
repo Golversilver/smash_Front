@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://mi-api.com',
+  apiUrl: 'https://smashback-production.up.railway.app',
 };
