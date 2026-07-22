@@ -1,38 +1,120 @@
 <nav class="bg-red-600 shadow-lg">
   <div class="max-w-7xl mx-auto px-4">
 
+    <!-- Barra principal -->
     <div class="flex h-20 items-center justify-between">
 
       <!-- Logo -->
-      <img src="/imagenes/logoSmash.png" alt="Smash Stats" class="h-20">
+      <a href="/panelPrincipal">
+        <img src="/imagenes/logoSmash.png" alt="Smash Stats" class="h-16 md:h-20">
+      </a>
 
-      <!-- Menú -->
-      <div class="flex items-center gap-8">
+      <!-- Menú escritorio -->
+      <div class="hidden md:flex items-center gap-8">
 
-        <a href="/perfil" class="text-white font-bold transition-transform duration-300 hover:scale-125 cursor-pointer">
+        <a href="/perfil"
+          class="text-white font-bold transition-transform duration-300 hover:scale-125">
           Perfil
         </a>
 
-        <a href="/panelPrincipal" class="text-white font-bold transition-transform duration-300 hover:scale-125 cursor-pointer">
-          panel
+        <a href="/panelPrincipal"
+          class="text-white font-bold transition-transform duration-300 hover:scale-125">
+          Panel
         </a>
 
-       <a href="/elenco" class="text-white font-bold transition-transform duration-300 hover:scale-125 cursor-pointer">
+        <a href="/elenco"
+          class="text-white font-bold transition-transform duration-300 hover:scale-125">
           Roster
         </a>
 
-        <a href="/escenarios" class="text-white font-bold transition-transform duration-300 hover:scale-125 cursor-pointer">
-          escenarios
+        <a href="/escenarios"
+          class="text-white font-bold transition-transform duration-300 hover:scale-125">
+          Escenarios
         </a>
 
-        <a href="/login" class="text-white font-bold transition-transform duration-300 hover:scale-125 cursor-pointer">
+        <a href="/login"
+          class="text-white font-bold transition-transform duration-300 hover:scale-125">
           Salir
         </a>
 
+      </div>
+
+      <!-- Botón menú móvil -->
+      <button
+        class="md:hidden text-white"
+        (click)="menuOpen = !menuOpen">
+
+        @if(!menuOpen){
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="w-8 h-8"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke="currentColor">
+
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+
+          </svg>
+
+        } @else {
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="w-8 h-8"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke="currentColor">
+
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"/>
+
+          </svg>
+
+        }
+
+      </button>
+
+    </div>
+
+    <!-- Menú móvil -->
+    @if(menuOpen){
+
+      <div class="md:hidden flex flex-col pb-5">
+
+        <a href="/perfil"
+          class="py-3 text-white font-semibold border-t border-red-500">
+          Perfil
+        </a>
+
+        <a href="/panelPrincipal"
+          class="py-3 text-white font-semibold border-t border-red-500">
+          Panel
+        </a>
+
+        <a href="/elenco"
+          class="py-3 text-white font-semibold border-t border-red-500">
+          Roster
+        </a>
+
+        <a href="/escenarios"
+          class="py-3 text-white font-semibold border-t border-red-500">
+          Escenarios
+        </a>
+
+        <a href="/login"
+          class="py-3 text-white font-semibold border-t border-red-500">
+          Salir
+        </a>
 
       </div>
 
-    </div>
+    }
 
   </div>
 </nav>
