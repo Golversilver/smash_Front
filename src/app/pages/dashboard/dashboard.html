@@ -1,20 +1,7 @@
 <app-navbar />
 
 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 md:p-8 mx-4 md:mx-8 mt-6">
-    
-        @if(selectedCharacter()){
 
-        <button
-            (click)="selectedCharacter.set(null)"
-            class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-gray-300 bg-white text-gray-700 font-semibold shadow-sm hover:bg-gray-50 hover:border-gray-400 transition cursor-pointer">
-
-            ← Volver a estadísticas generales
-
-        </button>
-
-    }
-
-    
 
    <div class="flex flex-col lg:flex-row items-center gap-10">
 
@@ -120,7 +107,9 @@
 
         }@else{
 
+
             <div class="flex flex-col items-center">
+
 
             <div
             class="w-[380px] h-[380px] rounded-full border-8 border-red-600 shadow-lg flex items-center justify-center">
@@ -130,6 +119,20 @@
                     class="w-[300px] h-[300px] object-contain">
 
             </div>
+
+
+            @if(selectedCharacter()){
+
+            <button
+                (click)="selectedCharacter.set(null)"
+                class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-gray-300 bg-white text-gray-700 font-semibold shadow-sm hover:bg-gray-50 hover:border-gray-400 transition cursor-pointer">
+
+                ← Volver a estadísticas generales
+
+            </button>
+
+            }
+
 
                 <div class="mt-8 w-[320px]">
 
@@ -145,6 +148,7 @@
                     placeholder="Buscar personaje..."
                     (change)="seleccionarPersonaje($event)">
                 </ng-select>
+
 
                   <!-- Modalidad -->
                 <div class="mt-6">
