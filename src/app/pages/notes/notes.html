@@ -799,7 +799,8 @@
       </p>
 
       <a
-        [routerLink]="['/notasPersonaje', rosterId, 'crear']"
+        [routerLink]="['/notas', rosterId, 'crearNota']"
+        [queryParams]="{ rival: rival()!.id }"
         class="inline-flex mt-8 px-8 py-4 rounded-2xl bg-red-600 text-white font-bold hover:bg-red-700 transition">
 
         + Crear primera nota
